@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html id="theme-data" class="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./dist/output.css" rel="stylesheet" />
+    <link rel="apple-touch-icon" sizes="180x180" href="src/assets/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="src/assets/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="src/assets/favicon-16x16.png">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <title>UniDrop</title>
+  </head>
+
+  <body class="bg-white dark:bg-zinc-900 transition-colors duration-1000">
+
+    <!-- Header with UniDrop -->
+    <header class="flex items-center justify-between px-4 py-2 bg-white dark:bg-zinc-900 transition-colors duration-1000">
+      <div class="flex items-center">
+        <a href="/" class="flex items-center">
+          <img src="./src/assets/unidrop.png" alt="UniDrop" class="h-24 w-24 mr-2" />
+          <span class="text-black dark:text-white text-3xl">UniDrop</span>
+        </a>
+      </div>
+      <div class="flex items-center">
+        <!-- add lightmode toggle -->
+        <button class="flex items-center focus:outline-none transition-transform- " onclick="coolThemes()">
+          <svg id="theme-toggle" class="h-12 w-12 fill-current text-gray-500 dark:text-yellow-300" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="3.25" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></circle>
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2.75V4.25"></path>
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 6.75L16.0659 7.93416"></path>
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.25 12.0001L19.75 12.0001"></path>
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 17.2501L16.0659 16.066"></path>
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 19.75V21.25"></path>
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.9341 16.0659L6.74996 17.25"></path>
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.25 12.0001L2.75 12.0001"></path>
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.93405 7.93423L6.74991 6.75003"></path>
+                      </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Body -->
+    <div class="flex flex-nowrap justify-center items-center space-x-5 mt-32">
+      <div class="xl:w-2/5 lg:w-2/5 l:w-2/5 md:w-2/5 min-w-2/5 xsm:w-full overflow-hidden">
+          <!-- Text Area For Input-->
+          <label
+          id="file-container"
+          class=" flex flex-col items-center px-4 py-6 bg-neutral-100 dark:bg-white rounded-lg shadow-lg tracking-wide uppercase cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-100"
+        >
+          <svg id="upload-icon"class="w-8 h-8 animate-bounce" fill="none" viewBox="0 0 24 24">
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M4.75 14.75V16.25C4.75 17.9069 6.09315 19.25 7.75 19.25H16.25C17.9069 19.25 19.25 17.9069 19.25 16.25V14.75"
+            ></path>
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M12 14.25L12 5"
+            ></path>
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M8.75 8.25L12 4.75L15.25 8.25"
+            ></path>
+          </svg>
+          <span id="file-select" class="mt-2 text-black text-base leading-normal">Select a file</span>
+          <input type="file" class="hidden" id="file-dropbox" />
+        </label>
+        <!-- Clipboard -->
+        <label
+        id="textclipboard-container"
+        onclick="changeICO()"               
+              class=" flex flex-col items-center px-4 py-6 bg-neutral-100 dark:bg-white rounded-lg shadow-lg tracking-wide uppercase cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-100 my-4"
+            >
+              <svg
+                id="copyclipboard"
+                class="w-8 h-8"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M9 6.75H7.75C6.64543 6.75 5.75 7.64543 5.75 8.75V17.25C5.75 18.3546 6.64543 19.25 7.75 19.25H16.25C17.3546 19.25 18.25 18.3546 18.25 17.25V8.75C18.25 7.64543 17.3546 6.75 16.25 6.75H15"
+                ></path>
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M14 8.25H10C9.44772 8.25 9 7.80228 9 7.25V5.75C9 5.19772 9.44772 4.75 10 4.75H14C14.5523 4.75 15 5.19772 15 5.75V7.25C15 7.80228 14.5523 8.25 14 8.25Z"
+                ></path>
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M9.75 12.25H14.25"
+                ></path>
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M9.75 15.25H14.25"
+                ></path>
+              </svg>
+              <span id="textclipboard" class="mt-2 text-black text-base leading-normal"
+                ><span>Copy From Clipboard</span></span
+              >
+              <input type="text" class="hidden" />
+            </label>
+            <!-- Reset button -->
+
+            <label
+            id="reset-button"
+            onclick="handleRemoveAll()"
+            class="flex flex-col hidden items-center px-4 py-6 bg-neutral-100 dark:bg-white rounded-lg shadow-lg tracking-wide uppercase cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-100"
+          >
+            <svg id="reset-icon"class="w-8 h-8" fill="red" viewBox="0 0 24 24">
+              <path stroke="red" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 6.75L6.75 17.25"></path><path stroke="red" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75 6.75L17.25 17.25"></path>
+            </svg>
+            <span id="reset-button-select" class="mt-2 text-black text-base leading-normal">reset</span>
+          </label>
+      </div>
+    </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="flex flex-col items-center justify-center text-center text-neutral-100 dark:text-neutral-300 fixed inset-x-0 bottom-0 pb-5">
+      <p class="text-sm text-black dark:text-neutral-300">Created by
+        </span><a class="text-blue-500" href="https://github.com/ssysm">Shengming Yuan,</a> <a class="text-blue-500" href="https://justinlokos.com">Justin Lokos and</a> <a class="text-blue-500" href="#">Siyu Qian</a> 
+      </p>
+    </footer>
+    <script>
+      function changeICO() {
+        // Change icon on click of copy clipboard
+        var copyClipboard = document.getElementById("copyclipboard");
+        var textClipboard = document.getElementById("textclipboard");
+        // Set inner html to the SVG
+        copyClipboard.innerHTML =
+          '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.75 12.8665L8.33995 16.4138C9.15171 17.5256 10.8179 17.504 11.6006 16.3715L18.25 6.75"></path>';
+        textClipboard.innerHTML = "Copied!";
+        navigator.clipboard.readText().then(
+          clipText => {
+            requestShareText(clipText);
+          });
+        // wait for 3 seconds and change back
+        setTimeout(function () {
+          copyClipboard.innerHTML =
+            '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 6.75H7.75C6.64543 6.75 5.75 7.64543 5.75 8.75V17.25C5.75 18.3546 6.64543 19.25 7.75 19.25H16.25C17.3546 19.25 18.25 18.3546 18.25 17.25V8.75C18.25 7.64543 17.3546 6.75 16.25 6.75H15"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 8.25H10C9.44772 8.25 9 7.80228 9 7.25V5.75C9 5.19772 9.44772 4.75 10 4.75H14C14.5523 4.75 15 5.19772 15 5.75V7.25C15 7.80228 14.5523 8.25 14 8.25Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 12.25H14.25"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 15.25H14.25"></path>';
+          textClipboard.innerHTML = "Copy from Clipboard";
+        }, 1000);
+      }
+
+      function coolThemes() {
+      if (document.getElementById("theme-data").getAttribute("class") === "dark") {
+        document.getElementById("theme-data").setAttribute("class", "light");
+        document.getElementById("theme-toggle").innerHTML = '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.25 15.7499C17.2352 16.2904 16.23 16.25 15 16.25C10.9959 16.25 7.75 13.0041 7.75 9.00001C7.75 7.77001 7.70951 6.76474 8.25 5.74994C5.96125 6.96891 4.75 9.2259 4.75 12C4.75 16.004 7.99594 19.25 12 19.25C14.7741 19.25 17.031 18.0387 18.25 15.7499Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 4.75C16 6.95914 14.9591 9 12.75 9C14.9591 9 16 11.0409 16 13.25C16 11.0409 17.0409 9 19.25 9C17.0409 9 16 6.95914 16 4.75Z"></path>'
+            } else {
+        document.getElementById("theme-data").setAttribute("class", "dark")
+        document.getElementById("theme-toggle").innerHTML = '<circle cx="12" cy="12" r="3.25" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></circle><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2.75V4.25"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 6.75L16.0659 7.93416"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.25 12.0001L19.75 12.0001"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 17.2501L16.0659 16.066"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 19.75V21.25"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.9341 16.0659L6.74996 17.25"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.25 12.0001L2.75 12.0001"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.93405 7.93423L6.74991 6.75003"></path>'
+            }
+        }
+        if (document.getElementById("theme-data").getAttribute("class") === "light") {
+        document.getElementById("theme-data").setAttribute("class", "light");
+        document.getElementById("theme-toggle").innerHTML = '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.25 15.7499C17.2352 16.2904 16.23 16.25 15 16.25C10.9959 16.25 7.75 13.0041 7.75 9.00001C7.75 7.77001 7.70951 6.76474 8.25 5.74994C5.96125 6.96891 4.75 9.2259 4.75 12C4.75 16.004 7.99594 19.25 12 19.25C14.7741 19.25 17.031 18.0387 18.25 15.7499Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 4.75C16 6.95914 14.9591 9 12.75 9C14.9591 9 16 11.0409 16 13.25C16 11.0409 17.0409 9 19.25 9C17.0409 9 16 6.95914 16 4.75Z"></path>'
+            } else {
+        document.getElementById("theme-data").setAttribute("class", "dark")
+        document.getElementById("theme-toggle").innerHTML = '<circle cx="12" cy="12" r="3.25" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></circle><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2.75V4.25"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 6.75L16.0659 7.93416"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.25 12.0001L19.75 12.0001"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 17.2501L16.0659 16.066"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 19.75V21.25"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.9341 16.0659L6.74996 17.25"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.25 12.0001L2.75 12.0001"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.93405 7.93423L6.74991 6.75003"></path>'
+            }
+
+        if(window.matchMedia('(prefers-color-scheme: dark)').matches){
+            document.getElementById("theme-data").setAttribute("class", "dark")
+            document.getElementById("theme-toggle").innerHTML = '<circle cx="12" cy="12" r="3.25" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></circle><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2.75V4.25"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 6.75L16.0659 7.93416"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.25 12.0001L19.75 12.0001"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 17.2501L16.0659 16.066"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 19.75V21.25"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.9341 16.0659L6.74996 17.25"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.25 12.0001L2.75 12.0001"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.93405 7.93423L6.74991 6.75003"></path>'
+        }
+        else{
+            document.getElementById("theme-data").setAttribute("class", "light")
+            document.getElementById("theme-toggle").innerHTML = '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.25 15.7499C17.2352 16.2904 16.23 16.25 15 16.25C10.9959 16.25 7.75 13.0041 7.75 9.00001C7.75 7.77001 7.70951 6.76474 8.25 5.74994C5.96125 6.96891 4.75 9.2259 4.75 12C4.75 16.004 7.99594 19.25 12 19.25C14.7741 19.25 17.031 18.0387 18.25 15.7499Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 4.75C16 6.95914 14.9591 9 12.75 9C14.9591 9 16 11.0409 16 13.25C16 11.0409 17.0409 9 19.25 9C17.0409 9 16 6.95914 16 4.75Z"></path>'
+        }
+            </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="app.js"></script>
+  </body>
+</html>
